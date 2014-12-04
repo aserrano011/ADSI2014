@@ -168,7 +168,7 @@ public class AltaAnimal extends JFrame {
 		Toro.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Color");
+		JLabel lblNewLabel_2 = new JLabel("Longitud Cornamenta");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);

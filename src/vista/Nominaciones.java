@@ -43,8 +43,8 @@ public class Nominaciones extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[grow][grow][grow]", "[grow][][][][]"));
 		
-		JList list = new JList();
-		contentPane.add(list, "cell 0 0 3 1,grow");
+		JList lblGanaderias = new JList();
+		contentPane.add(lblGanaderias, "cell 0 0 3 1,grow");
 		
 		JLabel lblNewLabel_2 = new JLabel("Primer Nominado:");
 		contentPane.add(lblNewLabel_2, "cell 0 1,alignx right,aligny center");
@@ -64,10 +64,10 @@ public class Nominaciones extends JFrame {
 		JLabel lblNewLabel_5 = new JLabel("New label");
 		contentPane.add(lblNewLabel_5, "cell 1 3 2 1,alignx left,aligny center");
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Aceptar");
 		contentPane.add(btnNewButton, "cell 0 4,alignx center,aligny center");
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("Reiniciar");
 		contentPane.add(btnNewButton_1, "cell 2 4,alignx center,aligny center");
 	}
 
