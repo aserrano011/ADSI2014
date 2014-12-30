@@ -11,20 +11,14 @@ import java.awt.Insets;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
-import javax.swing.JTree;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-import java.awt.Dimension;
-import java.awt.Component;
-import java.awt.GridLayout;
 import java.text.DateFormat;
 import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
 import javax.swing.JTabbedPane;
 
 public class AltaAnimal extends JFrame {
