@@ -48,17 +48,17 @@ public class GestAnimal extends JFrame {
 		JList lstAnimales = new JList();
 		contentPane.add(lstAnimales, "cell 0 0 2 6,grow");
 		
-		JButton btnNewButton_2 = new JButton("A\u00F1adir");
-		contentPane.add(btnNewButton_2, "cell 0 6");
+		JButton btnAnadir = new JButton("A\u00F1adir");
+		contentPane.add(btnAnadir, "cell 0 6");
 		
-		JButton btnNewButton_3 = new JButton("Modificar");
-		contentPane.add(btnNewButton_3, "cell 1 6");
+		JButton btnModificar = new JButton("Modificar");
+		contentPane.add(btnModificar, "cell 1 6");
 		
-		JButton btnNewButton_1 = new JButton("Eliminar");
-		contentPane.add(btnNewButton_1, "cell 0 7");
+		JButton btnEliminar = new JButton("Eliminar");
+		contentPane.add(btnEliminar, "cell 0 7");
 		
-		JButton btnNewButton = new JButton("Atr\u00E1s");
-		contentPane.add(btnNewButton, "cell 1 7");
+		JButton btnAtras = new JButton("Atr\u00E1s");
+		contentPane.add(btnAtras, "cell 1 7");
 	}
 
 }

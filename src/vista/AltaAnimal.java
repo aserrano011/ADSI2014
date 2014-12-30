@@ -56,6 +56,7 @@ public class AltaAnimal extends JFrame {
 	 * Create the frame.
 	 */
 	public AltaAnimal() {
+		setTitle("Gestion Animales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 322, 286);
 		GridBagLayout gridBagLayout = new GridBagLayout();
