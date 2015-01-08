@@ -8,11 +8,15 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import javax.swing.JList;
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GestAnimal extends JFrame {
 
 	/**
-	 * 
+	 *@author Endika Serrano Lomas
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -39,26 +43,47 @@ public class GestAnimal extends JFrame {
 	public GestAnimal() {
 		setTitle("Gestionar animales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 312, 300);
+		setBounds(100, 100, 386, 329);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow,center][grow,center]", "[grow][][][][][][][]"));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JList lstAnimales = new JList();
-		contentPane.add(lstAnimales, "cell 0 0 2 6,grow");
+		//BOTONES
+		
+		JPanel panelBotones = new JPanel();
+		contentPane.add(panelBotones, BorderLayout.SOUTH);
 		
 		JButton btnAnadir = new JButton("A\u00F1adir");
-		contentPane.add(btnAnadir, "cell 0 6");
+		panelBotones.add(btnAnadir);
 		
 		JButton btnModificar = new JButton("Modificar");
-		contentPane.add(btnModificar, "cell 1 6");
+		panelBotones.add(btnModificar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		contentPane.add(btnEliminar, "cell 0 7");
+		panelBotones.add(btnEliminar);
 		
 		JButton btnAtras = new JButton("Atr\u00E1s");
-		contentPane.add(btnAtras, "cell 1 7");
+		btnAtras.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent arg0) {
+				dispose();
+			}
+		});
+		panelBotones.add(btnAtras);
+		
+		//LISTA
+		
+		JPanel panelLista = new JPanel();
+		contentPane.add(panelLista, BorderLayout.CENTER);
+		
+		JList listAnimales = new JList();
+
+		JScrollPane scrollPane = new JScrollPane(listAnimales);
+		panelLista.add(scrollPane);
+		
+		//panelLista.add(listAnimales);
+		//scrollPane.setViewportView(list);
+		
 	}
 
 }
