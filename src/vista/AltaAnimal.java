@@ -61,7 +61,7 @@ public class AltaAnimal extends JFrame {
 	public AltaAnimal() {
 		setTitle("Gestion Animales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 377, 302);
+		setBounds(100, 100, 377, 283);
 		
 		DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
 		Format shortDate = DateFormat.getDateInstance(DateFormat.SHORT);
@@ -78,8 +78,11 @@ public class AltaAnimal extends JFrame {
 		}*/
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		JPanel pnlAnimales = new JPanel();
+		getContentPane().add(pnlAnimales, BorderLayout.CENTER);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		getContentPane().add(tabbedPane);
+		pnlAnimales.add(tabbedPane);
 		
 		//TORO
 		
@@ -176,26 +179,6 @@ public class AltaAnimal extends JFrame {
 		Toro.add(txtLongT, gbc_txtLongT);
 		txtLongT.setColumns(10);
 		
-		JPanel pnlToro = new JPanel();
-		GridBagConstraints gbc_pnlToro = new GridBagConstraints();
-		gbc_pnlToro.gridwidth = 2;
-		gbc_pnlToro.insets = new Insets(0, 0, 0, 5);
-		gbc_pnlToro.gridx = 0;
-		gbc_pnlToro.gridy = 7;
-		Toro.add(pnlToro, gbc_pnlToro);
-		pnlToro.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btnAniadirT = new JButton("A\u00F1adir");
-		pnlToro.add(btnAniadirT);
-		
-		JButton btnCerrarT = new JButton("Cerrar");
-		btnCerrarT.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent arg0) {
-				dispose();
-			}
-		});
-		pnlToro.add(btnCerrarT);
-		
 		//CABESTRO
 		
 		JPanel Cabestro = new JPanel();
@@ -291,25 +274,15 @@ public class AltaAnimal extends JFrame {
 		gbc_txtColorC.gridy = 5;
 		Cabestro.add(txtColorC, gbc_txtColorC);
 		
-		JPanel pnlCabestro = new JPanel();
-		GridBagConstraints gbc_pnlCabestro = new GridBagConstraints();
-		gbc_pnlCabestro.insets = new Insets(0, 0, 0, 5);
-		gbc_pnlCabestro.gridwidth = 2;
-		gbc_pnlCabestro.gridx = 0;
-		gbc_pnlCabestro.gridy = 7;
-		Cabestro.add(pnlCabestro, gbc_pnlCabestro);
-		pnlCabestro.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel pnlBotones = new JPanel();
+		getContentPane().add(pnlBotones, BorderLayout.SOUTH);
+		pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnAnadirC = new JButton("A\u00F1adir");
-		pnlCabestro.add(btnAnadirC);
+		JButton btnAceptar = new JButton("Aceptar");
+		pnlBotones.add(btnAceptar);
 		
-		JButton btnCerrarC = new JButton("Cerrar");
-		btnCerrarC.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent arg0) {
-				dispose();
-			}
-		});
-		pnlCabestro.add(btnCerrarC);
+		JButton btnCancelar = new JButton("Cancelar");
+		pnlBotones.add(btnCancelar);
 	}
 
 }
