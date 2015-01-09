@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -16,6 +17,12 @@ import java.awt.Insets;
 
 import javax.swing.JLabel;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 public class Login extends JDialog {
 
 	/**
@@ -23,7 +30,7 @@ public class Login extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JTextField userField;
 	private JPasswordField passwordField;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -71,14 +78,14 @@ public class Login extends JDialog {
 			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		}
 		{
-			textField = new JTextField();
-			GridBagConstraints gbc_textField = new GridBagConstraints();
-			gbc_textField.insets = new Insets(0, 0, 5, 0);
-			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField.gridx = 1;
-			gbc_textField.gridy = 0;
-			contentPanel.add(textField, gbc_textField);
-			textField.setColumns(10);
+			userField = new JTextField();
+			GridBagConstraints gbc_userField = new GridBagConstraints();
+			gbc_userField.insets = new Insets(0, 0, 5, 0);
+			gbc_userField.fill = GridBagConstraints.HORIZONTAL;
+			gbc_userField.gridx = 1;
+			gbc_userField.gridy = 0;
+			contentPanel.add(userField, gbc_userField);
+			userField.setColumns(10);
 		}
 		{
 			lblNewLabel_1 = new JLabel("Contrase\u00F1a:");
@@ -103,12 +110,37 @@ public class Login extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("OK");
+				okButton.addMouseListener(new MouseAdapter()
+				{
+					public void mouseClicked(MouseEvent e)
+					{
+						try
+						{
+							modelo.Login.identificarse(userField.getText(), passwordField.getPassword());
+						}
+						catch (SQLException e1)
+						{
+							e1.printStackTrace();
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				cancelButton = new JButton("Cancel");
+				cancelButton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0)
+					{
+						System.exit(0);
+					}
+				});
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
