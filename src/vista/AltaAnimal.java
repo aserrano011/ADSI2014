@@ -20,6 +20,9 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AltaAnimal extends JFrame {
 
@@ -28,13 +31,13 @@ public class AltaAnimal extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtNombre;
-	private JTextField textField_1;
-	private JTextField txtPeso;
-	private JTextField textField_3;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtAlturaT;
+	private JTextField txtPesoT;
+	private JTextField txtLongT;
+	private JTextField txtNombreC;
+	private JTextField txtPesoC;
+	private JTextField txtAlturaC;
+	private JTextField txtColorC;
 
 	/**
 	 * Launch the application.
@@ -58,13 +61,7 @@ public class AltaAnimal extends JFrame {
 	public AltaAnimal() {
 		setTitle("Gestion Animales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 322, 286);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		getContentPane().setLayout(gridBagLayout);
+		setBounds(100, 100, 377, 283);
 		
 		DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
 		Format shortDate = DateFormat.getDateInstance(DateFormat.SHORT);
@@ -79,24 +76,26 @@ public class AltaAnimal extends JFrame {
 			e.printStackTrace();
 			lblNewLabel_3.setText("jar!");
 		}*/
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnlAnimales = new JPanel();
+		getContentPane().add(pnlAnimales, BorderLayout.CENTER);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
-		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
-		gbc_tabbedPane.gridx = 0;
-		gbc_tabbedPane.gridy = 0;
-		getContentPane().add(tabbedPane, gbc_tabbedPane);
+		pnlAnimales.add(tabbedPane);
+		
+		//TORO
 		
 		JPanel Toro = new JPanel();
 		tabbedPane.addTab("Toro", null, Toro, null);
 		GridBagLayout gbl_Toro = new GridBagLayout();
-		gbl_Toro.columnWidths = new int[]{103, 182, 0};
+		gbl_Toro.columnWidths = new int[]{132, 182, 0};
 		gbl_Toro.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_Toro.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_Toro.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_Toro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		Toro.setLayout(gbl_Toro);
 		
-		JLabel lblNombre = new JLabel("Nombre");
+		JLabel lblNombre = new JLabel("Nombre:");
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
@@ -113,195 +112,177 @@ public class AltaAnimal extends JFrame {
 		Toro.add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("A\u00F1o de nacimiento");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 0;
-		gbc_lblNewLabel_3.gridy = 2;
-		Toro.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel lblAnio = new JLabel("A\u00F1o de nacimiento:");
+		GridBagConstraints gbc_lblAnio = new GridBagConstraints();
+		gbc_lblAnio.anchor = GridBagConstraints.EAST;
+		gbc_lblAnio.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAnio.gridx = 0;
+		gbc_lblAnio.gridy = 2;
+		Toro.add(lblAnio, gbc_lblAnio);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField(shortDate);
-		GridBagConstraints gbc_formattedTextField = new GridBagConstraints();
-		gbc_formattedTextField.insets = new Insets(0, 0, 5, 0);
-		gbc_formattedTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_formattedTextField.gridx = 1;
-		gbc_formattedTextField.gridy = 2;
-		Toro.add(formattedTextField, gbc_formattedTextField);
+		JFormattedTextField txtAnio = new JFormattedTextField(shortDate);
+		GridBagConstraints gbc_txtAnio = new GridBagConstraints();
+		gbc_txtAnio.insets = new Insets(0, 0, 5, 0);
+		gbc_txtAnio.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtAnio.gridx = 1;
+		gbc_txtAnio.gridy = 2;
+		Toro.add(txtAnio, gbc_txtAnio);
 		
-		JLabel lblNewLabel = new JLabel("Peso");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 3;
-		Toro.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel lblPesoT = new JLabel("Peso:");
+		GridBagConstraints gbc_lblPesoT = new GridBagConstraints();
+		gbc_lblPesoT.anchor = GridBagConstraints.EAST;
+		gbc_lblPesoT.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPesoT.gridx = 0;
+		gbc_lblPesoT.gridy = 3;
+		Toro.add(lblPesoT, gbc_lblPesoT);
 		
-		txtPeso = new JTextField();
-		GridBagConstraints gbc_txtPeso = new GridBagConstraints();
-		gbc_txtPeso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtPeso.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPeso.gridx = 1;
-		gbc_txtPeso.gridy = 3;
-		Toro.add(txtPeso, gbc_txtPeso);
-		txtPeso.setColumns(10);
+		txtPesoT = new JTextField();
+		GridBagConstraints gbc_txtPesoT = new GridBagConstraints();
+		gbc_txtPesoT.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPesoT.insets = new Insets(0, 0, 5, 0);
+		gbc_txtPesoT.gridx = 1;
+		gbc_txtPesoT.gridy = 3;
+		Toro.add(txtPesoT, gbc_txtPesoT);
+		txtPesoT.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Altura");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 4;
-		Toro.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel lblAlturaT = new JLabel("Altura:");
+		GridBagConstraints gbc_lblAlturaT = new GridBagConstraints();
+		gbc_lblAlturaT.anchor = GridBagConstraints.EAST;
+		gbc_lblAlturaT.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAlturaT.gridx = 0;
+		gbc_lblAlturaT.gridy = 4;
+		Toro.add(lblAlturaT, gbc_lblAlturaT);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 4;
-		Toro.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		txtAlturaT = new JTextField();
+		GridBagConstraints gbc_txtAlturaT = new GridBagConstraints();
+		gbc_txtAlturaT.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtAlturaT.insets = new Insets(0, 0, 5, 0);
+		gbc_txtAlturaT.gridx = 1;
+		gbc_txtAlturaT.gridy = 4;
+		Toro.add(txtAlturaT, gbc_txtAlturaT);
+		txtAlturaT.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Longitud Cornamenta");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 5;
-		Toro.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lblLongT = new JLabel("Longitud Cornamenta:");
+		GridBagConstraints gbc_lblLongT = new GridBagConstraints();
+		gbc_lblLongT.anchor = GridBagConstraints.EAST;
+		gbc_lblLongT.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLongT.gridx = 0;
+		gbc_lblLongT.gridy = 5;
+		Toro.add(lblLongT, gbc_lblLongT);
 		
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_3.gridx = 1;
-		gbc_textField_3.gridy = 5;
-		Toro.add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		txtLongT = new JTextField();
+		GridBagConstraints gbc_txtLongT = new GridBagConstraints();
+		gbc_txtLongT.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtLongT.insets = new Insets(0, 0, 5, 0);
+		gbc_txtLongT.gridx = 1;
+		gbc_txtLongT.gridy = 5;
+		Toro.add(txtLongT, gbc_txtLongT);
+		txtLongT.setColumns(10);
 		
-		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 2;
-		gbc_panel.insets = new Insets(0, 0, 0, 5);
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 7;
-		Toro.add(panel, gbc_panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btnAniadir = new JButton("A\u00F1adir");
-		panel.add(btnAniadir);
-		
-		JButton btnCerrar = new JButton("Cerrar");
-		panel.add(btnCerrar);
+		//CABESTRO
 		
 		JPanel Cabestro = new JPanel();
 		tabbedPane.addTab("Cabestro", null, Cabestro, null);
 		GridBagLayout gbl_Cabestro = new GridBagLayout();
-		gbl_Cabestro.columnWidths = new int[]{103, 182, 0};
+		gbl_Cabestro.columnWidths = new int[]{132, 182, 0};
 		gbl_Cabestro.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_Cabestro.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_Cabestro.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_Cabestro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		Cabestro.setLayout(gbl_Cabestro);
 		
-		JLabel label = new JLabel("Nombre");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.EAST;
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 1;
-		Cabestro.add(label, gbc_label);
+		JLabel lblNombreC = new JLabel("Nombre:");
+		GridBagConstraints gbc_lblNombreC = new GridBagConstraints();
+		gbc_lblNombreC.anchor = GridBagConstraints.EAST;
+		gbc_lblNombreC.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNombreC.gridx = 0;
+		gbc_lblNombreC.gridy = 1;
+		Cabestro.add(lblNombreC, gbc_lblNombreC);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 1;
-		Cabestro.add(textField, gbc_textField);
+		txtNombreC = new JTextField();
+		txtNombreC.setColumns(10);
+		GridBagConstraints gbc_txtNombreC = new GridBagConstraints();
+		gbc_txtNombreC.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtNombreC.insets = new Insets(0, 0, 5, 0);
+		gbc_txtNombreC.gridx = 1;
+		gbc_txtNombreC.gridy = 1;
+		Cabestro.add(txtNombreC, gbc_txtNombreC);
 		
-		JLabel label_1 = new JLabel("A\u00F1o de nacimiento");
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.anchor = GridBagConstraints.EAST;
-		gbc_label_1.insets = new Insets(0, 0, 5, 5);
-		gbc_label_1.gridx = 0;
-		gbc_label_1.gridy = 2;
-		Cabestro.add(label_1, gbc_label_1);
+		JLabel lblAnioC = new JLabel("A\u00F1o de nacimiento:");
+		GridBagConstraints gbc_lblAnioC = new GridBagConstraints();
+		gbc_lblAnioC.anchor = GridBagConstraints.EAST;
+		gbc_lblAnioC.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAnioC.gridx = 0;
+		gbc_lblAnioC.gridy = 2;
+		Cabestro.add(lblAnioC, gbc_lblAnioC);
 		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField((Format) null);
-		GridBagConstraints gbc_formattedTextField_1 = new GridBagConstraints();
-		gbc_formattedTextField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_formattedTextField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_formattedTextField_1.gridx = 1;
-		gbc_formattedTextField_1.gridy = 2;
-		Cabestro.add(formattedTextField_1, gbc_formattedTextField_1);
+		JFormattedTextField txtAnioC = new JFormattedTextField((Format) null);
+		GridBagConstraints gbc_txtAnioC = new GridBagConstraints();
+		gbc_txtAnioC.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtAnioC.insets = new Insets(0, 0, 5, 0);
+		gbc_txtAnioC.gridx = 1;
+		gbc_txtAnioC.gridy = 2;
+		Cabestro.add(txtAnioC, gbc_txtAnioC);
 		
-		JLabel label_2 = new JLabel("Peso");
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		gbc_label_2.anchor = GridBagConstraints.EAST;
-		gbc_label_2.insets = new Insets(0, 0, 5, 5);
-		gbc_label_2.gridx = 0;
-		gbc_label_2.gridy = 3;
-		Cabestro.add(label_2, gbc_label_2);
+		JLabel lblPesoC = new JLabel("Peso:");
+		GridBagConstraints gbc_lblPesoC = new GridBagConstraints();
+		gbc_lblPesoC.anchor = GridBagConstraints.EAST;
+		gbc_lblPesoC.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPesoC.gridx = 0;
+		gbc_lblPesoC.gridy = 3;
+		Cabestro.add(lblPesoC, gbc_lblPesoC);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 3;
-		Cabestro.add(textField_2, gbc_textField_2);
+		txtPesoC = new JTextField();
+		txtPesoC.setColumns(10);
+		GridBagConstraints gbc_txtPesoC = new GridBagConstraints();
+		gbc_txtPesoC.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPesoC.insets = new Insets(0, 0, 5, 0);
+		gbc_txtPesoC.gridx = 1;
+		gbc_txtPesoC.gridy = 3;
+		Cabestro.add(txtPesoC, gbc_txtPesoC);
 		
-		JLabel label_3 = new JLabel("Altura");
-		GridBagConstraints gbc_label_3 = new GridBagConstraints();
-		gbc_label_3.anchor = GridBagConstraints.EAST;
-		gbc_label_3.insets = new Insets(0, 0, 5, 5);
-		gbc_label_3.gridx = 0;
-		gbc_label_3.gridy = 4;
-		Cabestro.add(label_3, gbc_label_3);
+		JLabel lblAlturaC = new JLabel("Altura:");
+		GridBagConstraints gbc_lblAlturaC = new GridBagConstraints();
+		gbc_lblAlturaC.anchor = GridBagConstraints.EAST;
+		gbc_lblAlturaC.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAlturaC.gridx = 0;
+		gbc_lblAlturaC.gridy = 4;
+		Cabestro.add(lblAlturaC, gbc_lblAlturaC);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_4.gridx = 1;
-		gbc_textField_4.gridy = 4;
-		Cabestro.add(textField_4, gbc_textField_4);
+		txtAlturaC = new JTextField();
+		txtAlturaC.setColumns(10);
+		GridBagConstraints gbc_txtAlturaC = new GridBagConstraints();
+		gbc_txtAlturaC.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtAlturaC.insets = new Insets(0, 0, 5, 0);
+		gbc_txtAlturaC.gridx = 1;
+		gbc_txtAlturaC.gridy = 4;
+		Cabestro.add(txtAlturaC, gbc_txtAlturaC);
 		
-		JLabel label_4 = new JLabel("Color");
-		GridBagConstraints gbc_label_4 = new GridBagConstraints();
-		gbc_label_4.anchor = GridBagConstraints.EAST;
-		gbc_label_4.insets = new Insets(0, 0, 5, 5);
-		gbc_label_4.gridx = 0;
-		gbc_label_4.gridy = 5;
-		Cabestro.add(label_4, gbc_label_4);
+		JLabel lblColorC = new JLabel("Color:");
+		GridBagConstraints gbc_lblColorC = new GridBagConstraints();
+		gbc_lblColorC.anchor = GridBagConstraints.EAST;
+		gbc_lblColorC.insets = new Insets(0, 0, 5, 5);
+		gbc_lblColorC.gridx = 0;
+		gbc_lblColorC.gridy = 5;
+		Cabestro.add(lblColorC, gbc_lblColorC);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_5.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_5.gridx = 1;
-		gbc_textField_5.gridy = 5;
-		Cabestro.add(textField_5, gbc_textField_5);
+		txtColorC = new JTextField();
+		txtColorC.setColumns(10);
+		GridBagConstraints gbc_txtColorC = new GridBagConstraints();
+		gbc_txtColorC.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtColorC.insets = new Insets(0, 0, 5, 0);
+		gbc_txtColorC.gridx = 1;
+		gbc_txtColorC.gridy = 5;
+		Cabestro.add(txtColorC, gbc_txtColorC);
 		
-		JPanel panel_2 = new JPanel();
-		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-		gbc_panel_2.insets = new Insets(0, 0, 0, 5);
-		gbc_panel_2.gridwidth = 2;
-		gbc_panel_2.gridx = 0;
-		gbc_panel_2.gridy = 7;
-		Cabestro.add(panel_2, gbc_panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel pnlBotones = new JPanel();
+		getContentPane().add(pnlBotones, BorderLayout.SOUTH);
+		pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton button = new JButton("A\u00F1adir");
-		panel_2.add(button);
+		JButton btnAceptar = new JButton("Aceptar");
+		pnlBotones.add(btnAceptar);
 		
-		JButton button_1 = new JButton("Cerrar");
-		panel_2.add(button_1);
+		JButton btnCancelar = new JButton("Cancelar");
+		pnlBotones.add(btnCancelar);
 	}
 
 }
