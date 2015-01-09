@@ -14,6 +14,7 @@ import javax.swing.JPasswordField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Window;
 
 import javax.swing.JLabel;
 
@@ -23,8 +24,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
-public class Login extends JDialog {
-
+public class Login extends JDialog
+{
 	/**
 	 * 
 	 */
@@ -54,7 +55,8 @@ public class Login extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Login() {
+	public Login()
+	{
 		setTitle("Iniciar sesi\u00F3n");
 		setResizable(false);
 		setModal(true);
@@ -117,6 +119,7 @@ public class Login extends JDialog {
 						try
 						{
 							modelo.Login.identificarse(userField.getText(), passwordField.getPassword());
+							Login.this.cerrar();
 						}
 						catch (SQLException e1)
 						{
@@ -146,5 +149,9 @@ public class Login extends JDialog {
 			}
 		}
 	}
-
+	
+	public void cerrar()
+	{
+		this.dispose();
+	}
 }

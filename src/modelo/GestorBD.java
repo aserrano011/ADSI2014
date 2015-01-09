@@ -86,7 +86,8 @@ public class GestorBD {
      * @return
      * @throws SQLException
      */
-    public ResultSet consulta(String strSQL) throws SQLException {
+    public ResultSet consulta(String strSQL) throws SQLException
+    {
             comprobarConexion();
             return this.sentencia.executeQuery(strSQL);
     }

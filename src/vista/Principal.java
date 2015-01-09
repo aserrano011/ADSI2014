@@ -17,30 +17,35 @@ public class Principal {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				try
+				{
 					Principal window = new Principal();
 					window.frmPantallaPrincipal.setVisible(true);
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
 	 */
-	public Principal() {
-		initialize();
+	public Principal(int pIdGanaderia, String pGanaderia)
+	{
+		initialize(pIdGanaderia, pGanaderia);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(int pIdGanaderia, String pGanaderia) {
 		frmPantallaPrincipal = new JFrame();
 		frmPantallaPrincipal.setTitle("Pantalla principal");
 		frmPantallaPrincipal.setBounds(100, 100, 390, 267);
@@ -52,7 +57,7 @@ public class Principal {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmPantallaPrincipal.getContentPane().setLayout(gridBagLayout);
 		
-		JLabel lblGanaderia = new JLabel("Nombre de la ganaderia");
+		JLabel lblGanaderia = new JLabel(pGanaderia);
 		GridBagConstraints gbc_lblGanaderia = new GridBagConstraints();
 		gbc_lblGanaderia.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGanaderia.gridx = 2;
@@ -106,6 +111,7 @@ public class Principal {
 		gbc_btnSalir.gridx = 3;
 		gbc_btnSalir.gridy = 7;
 		frmPantallaPrincipal.getContentPane().add(btnSalir, gbc_btnSalir);
+		frmPantallaPrincipal.setVisible(true);
 	}
 
 }
