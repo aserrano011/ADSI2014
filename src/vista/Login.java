@@ -112,6 +112,10 @@ public class Login extends JDialog
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 				okButton.addMouseListener(new MouseAdapter()
 				{
 					public void mouseClicked(MouseEvent e)
@@ -134,7 +138,7 @@ public class Login extends JDialog
 			{
 				cancelButton = new JButton("Cancel");
 				cancelButton.addMouseListener(new MouseAdapter() {
-					@Override
+					
 					public void mouseClicked(MouseEvent arg0)
 					{
 						System.exit(0);

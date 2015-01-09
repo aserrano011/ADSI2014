@@ -9,9 +9,14 @@ import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Principal {
-
+	
+	private int idGanaderia;
 	private JFrame frmPantallaPrincipal;
 
 	/**
@@ -39,13 +44,14 @@ public class Principal {
 	 */
 	public Principal(int pIdGanaderia, String pGanaderia)
 	{
-		initialize(pIdGanaderia, pGanaderia);
+		idGanaderia = pIdGanaderia;
+		initialize(pGanaderia);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(int pIdGanaderia, String pGanaderia) {
+	private void initialize(String pGanaderia) {
 		frmPantallaPrincipal = new JFrame();
 		frmPantallaPrincipal.setTitle("Pantalla principal");
 		frmPantallaPrincipal.setBounds(100, 100, 390, 267);
@@ -65,6 +71,16 @@ public class Principal {
 		frmPantallaPrincipal.getContentPane().add(lblGanaderia, gbc_lblGanaderia);
 		
 		JButton btnGestAnim = new JButton("Gestionar Animales");
+		btnGestAnim.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent arg0) {
+				GestAnimal gA = new GestAnimal(idGanaderia);
+				gA.setVisible(true);
+			}
+		});
+		btnGestAnim.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		GridBagConstraints gbc_btnGestAnim = new GridBagConstraints();
 		gbc_btnGestAnim.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnGestAnim.insets = new Insets(0, 0, 5, 5);
