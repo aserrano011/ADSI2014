@@ -7,33 +7,24 @@ import java.sql.SQLException;
  * @author Endika Serrano Lomas
  *
  */
-public class Cabestro {
+public class Cabestro extends Animal{
 	
 	private int idCabestro;
-	private String nacimiento;
-	private float peso;
-	private float altura;
 	private String color;
 	
 	public Cabestro(int pIdCabestro, String pNacimiento, Float pPeso, Float pAltura, String pColor){
+		super(pNacimiento,pPeso,pAltura);
 		idCabestro = pIdCabestro;
-		nacimiento = pNacimiento;
-		peso = pPeso;
-		altura = pAltura;
+		
 		color = pColor;
 	}
 
 	
 	/**
 	 * Modifica el cabestro en la base de datos
-	 * @param pIdCabestro
-	 * @param pNacimiento
-	 * @param pPeso
-	 * @param pAltura
-	 * @param pColor
 	 * @return
 	 */
-	public int modificarCabestro(){
+	public int modificarAnimal(){
 		
 		String strSQL ="UPDATE Cabestro SET nacimiento = " + this.nacimiento + 
 				", peso = " + this.peso + ", altura = " + this.altura + ", color = " + this.color + " " +
@@ -51,9 +42,8 @@ public class Cabestro {
 	
 	/**
 	 * Elimina el cabestro de la base de datos
-	 * @param pIdCabestro
 	 */
-	public void eliminarCabestro(){
+	public void eliminarAnimal(){
 		
 		String strSQL = "DELETE FROM Cabestro WHERE idCabestro = " + this.idCabestro + ";";
 		

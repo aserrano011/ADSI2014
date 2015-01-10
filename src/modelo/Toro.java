@@ -8,21 +8,16 @@ import java.sql.SQLException;
  *
  */
 
-public class Toro {
+public class Toro extends Animal{
 
 	private int idToro;
 	private String nombre;
-	private String nacimiento;
-	private float peso;
-	private float altura;
 	private float longcorn;
 	
 	public Toro(int pIdToro, String pNombre, String pNacimiento, float pPeso, float pAltura, float pLongCorn){
+		super(pNacimiento,pPeso,pAltura);
 		idToro = pIdToro;
 		nombre = pNombre;
-		nacimiento = pNacimiento;
-		peso = pPeso;
-		altura = pAltura;
 		longcorn = pLongCorn;
 	}
 	
@@ -36,7 +31,7 @@ public class Toro {
 	 * @param pLongitud
 	 * @return
 	 */
-	public int modificarToro(){
+	public int modificarAnimal(){
 			
 			String strSQL ="UPDATE Toro SET nombre = " + this.nombre + ", nacimiento = " + this.nacimiento + 
 					", peso = " + this.peso + ", altura = " + this.altura + ", longcorn = " + this.longcorn + " " +
@@ -56,7 +51,7 @@ public class Toro {
 	 * Elimina el toro de la base de datos
 	 * @param pIdToro
 	 */
-	public void eliminarToro(){
+	public void eliminarAnimal(){
 		
 		String strSQL = "DELETE FROM Toro WHERE idToro = " + this.idToro + ";";
 		

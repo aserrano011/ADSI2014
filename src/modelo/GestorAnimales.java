@@ -34,14 +34,15 @@ public class GestorAnimales {
 	 * @param pLongitud
 	 * @param pGanaderia
 	 */
-	public void anadirToro(int pIdToro, String pNombre, String pNacimiento, Float pPeso, Float pAltura, Float pLongitud, String pGanaderia){
+	public void anadirToro(String pNombre, String pNacimiento, Float pPeso, Float pAltura, Float pLongitud, int pIdGanaderia){
 		
 		String strSQLFichaje;
 				
 				try {
 					
-					strSQLFichaje = "INSERT INTO Toro VALUES(" + pNombre + "," + pNacimiento + 
-							"," + pPeso + "," + pAltura + "," + pLongitud + "," + pGanaderia + ");";
+					strSQLFichaje = "INSERT INTO Toro (nombre,nacimiento,peso,altura,longcorn,ganaderia) "
+							+ "VALUES(\"" + pNombre + "\",\"" + pNacimiento + "\"," + pPeso + 
+							"," + pAltura + "," + pLongitud + "," + pIdGanaderia + ");";
 		
 					int result = GestorBD.getInstance().insertar(strSQLFichaje);
 					
@@ -65,14 +66,14 @@ public class GestorAnimales {
 	 * @param pColor
 	 * @param pGanaderia
 	 */
-	public void anadirCabestro(int pIdCabestro, String pNombre, String pNacimiento, Float pPeso, Float pAltura, String pColor, String pGanaderia){
+	public void anadirCabestro(String pNacimiento, Float pPeso, Float pAltura, String pColor, int pIdGanaderia){
 		
 		String strSQLFichaje;
 				
 				try {
 					
-					strSQLFichaje = "INSERT INTO Cabestro VALUES(" + pNombre + "," + pNacimiento + 
-							"," + pPeso + "," + pAltura + "," + pColor + "," + pGanaderia + ");";
+					strSQLFichaje = "INSERT INTO Cabestro (nacimiento,peso,altura,color,ganaderia)VALUES(\"" 
+					+ pNacimiento + "\"," + pPeso + "," + pAltura + ",\"" + pColor + "\"," + pIdGanaderia + ");";
 		
 					int result = GestorBD.getInstance().insertar(strSQLFichaje);
 					
@@ -104,7 +105,7 @@ public class GestorAnimales {
 			
 			resultado.first();
 			do {
-				//System.out.println(resultado.getDate("nacimiento".toString()));
+				
 				int idToro = resultado.getInt("idToro");
 				String nombre = resultado.getString("nombre");
 				String nacimiento = resultado.getDate("nacimiento").toString();
