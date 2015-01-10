@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -14,7 +13,6 @@ import javax.swing.JPasswordField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Window;
 
 import javax.swing.JLabel;
 
@@ -27,7 +25,7 @@ import java.sql.SQLException;
 public class Login extends JDialog
 {
 	/**
-	 * 
+	 * Declared attributes
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -42,12 +40,16 @@ public class Login extends JDialog
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
+	public static void main(String[] args)
+	{
+		try
+		{
 			Login dialog = new Login();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -137,8 +139,8 @@ public class Login extends JDialog
 			{
 				//Botón CANCEL
 				cancelButton = new JButton("Cancel");
-				cancelButton.addMouseListener(new MouseAdapter() {
-					@Override
+				cancelButton.addMouseListener(new MouseAdapter()
+				{
 					public void mouseClicked(MouseEvent arg0)
 					{
 						System.exit(0);
