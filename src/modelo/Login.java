@@ -3,8 +3,11 @@ package modelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.Popup;
+import javax.swing.JOptionPane;
+
+import vista.Principal;
 
 public class Login
 {
@@ -13,19 +16,20 @@ public class Login
 		
 	}
 	
-	public static void identificarse(String pUser, char[] pPass) throws SQLException
+	public static void identificarse(String pUser, String pPass) throws SQLException
 	{
-		ResultSet rs1 = GestorBD.getInstance().consulta("Select * from ADSI.Ganaderia where ADSI.Ganaderia.Nombre = \"" + pUser + "\" and ADSI.Ganaderia.Password = \"" + String.valueOf(pPass) + "\"");
-		rs1.first();
-		int idGanaderia = rs1.getInt("idGanaderia");
-		if (rs1!=null)
+		ResultSet rs1 = GestorBD.getInstance().consulta("Select * from ADSI.Ganaderia where ADSI.Ganaderia.Nombre = \"" + pUser + "\" and ADSI.Ganaderia.Password = \"" + pPass + "\"");
+		if (rs1.first())
 		{
-			new vista.Principal(idGanaderia, pUser);
-			//vista.Login.cerrar();
+			int idGanaderia = rs1.getInt("idGanaderia");
+			new Principal(idGanaderia, pUser);
 		}
-		/*else
+		else
 		{
-			Popup pp = new Popup();
-		}*/
+			JOptionPane.showMessageDialog(new JFrame(), "Usuario o contraseña incorrectos.", "Login erroneo", JOptionPane.ERROR_MESSAGE);
+			vista.Login dialog = new vista.Login();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		}
 	}
 }
