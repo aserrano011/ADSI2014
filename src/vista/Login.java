@@ -70,7 +70,7 @@ public class Login extends JDialog
 		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
-		{
+		{	//Label USUARIO
 			lblNewLabel = new JLabel("Usuario:");
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 			gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
@@ -79,7 +79,7 @@ public class Login extends JDialog
 			gbc_lblNewLabel.gridy = 0;
 			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		}
-		{
+		{	//Caja de texto USUARIO
 			userField = new JTextField();
 			GridBagConstraints gbc_userField = new GridBagConstraints();
 			gbc_userField.insets = new Insets(0, 0, 5, 0);
@@ -89,7 +89,7 @@ public class Login extends JDialog
 			contentPanel.add(userField, gbc_userField);
 			userField.setColumns(10);
 		}
-		{
+		{	//Label PASSWORD
 			lblNewLabel_1 = new JLabel("Contrase\u00F1a:");
 			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 			gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
@@ -98,7 +98,7 @@ public class Login extends JDialog
 			gbc_lblNewLabel_1.gridy = 1;
 			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		}
-		{
+		{	//Caja de texto PASSWORD
 			passwordField = new JPasswordField();
 			GridBagConstraints gbc_passwordField = new GridBagConstraints();
 			gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
@@ -106,11 +106,12 @@ public class Login extends JDialog
 			gbc_passwordField.gridy = 1;
 			contentPanel.add(passwordField, gbc_passwordField);
 		}
-		{
+		{	//Panel de botones
 			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
+				//Botón OK
 				okButton = new JButton("OK");
 				okButton.addMouseListener(new MouseAdapter()
 				{
@@ -118,8 +119,10 @@ public class Login extends JDialog
 					{
 						try
 						{
-							modelo.Login.identificarse(userField.getText(), passwordField.getPassword());
+							String usuario = userField.getText();
+							String password = String.valueOf(passwordField.getPassword());
 							Login.this.cerrar();
+							modelo.Login.identificarse(usuario, password);
 						}
 						catch (SQLException e1)
 						{
@@ -132,6 +135,7 @@ public class Login extends JDialog
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
+				//Botón CANCEL
 				cancelButton = new JButton("Cancel");
 				cancelButton.addMouseListener(new MouseAdapter() {
 					@Override
