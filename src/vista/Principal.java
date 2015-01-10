@@ -77,10 +77,6 @@ public class Principal {
 				gA.setVisible(true);
 			}
 		});
-		btnGestAnim.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		GridBagConstraints gbc_btnGestAnim = new GridBagConstraints();
 		gbc_btnGestAnim.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnGestAnim.insets = new Insets(0, 0, 5, 5);

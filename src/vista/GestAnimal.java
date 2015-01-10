@@ -70,7 +70,7 @@ public class GestAnimal extends JFrame {
 	
 	GestAnimal(int pIdGanaderia) {
 		//TODO
-		idGanaderia = 1;
+		idGanaderia = pIdGanaderia;
 		inicializar();
 	}
 	
@@ -108,8 +108,9 @@ public class GestAnimal extends JFrame {
 				aA.setVisible(true);
 				
 				if (!aA.isVisible()){
-					listaCabestros.setModel(GestorAnimales.getInstance().obtenerCabestros(1));
-					listaToros.setModel(GestorAnimales.getInstance().obtenerToros(1));
+					//TODO
+					listaCabestros.setModel(GestorAnimales.getInstance().obtenerCabestros(idGanaderia));
+					listaToros.setModel(GestorAnimales.getInstance().obtenerToros(idGanaderia));
 				}
 			}
 		});
@@ -127,13 +128,14 @@ public class GestAnimal extends JFrame {
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
+				//TODO
 				if (listaToros.isSelectionEmpty() && !listaCabestros.isSelectionEmpty()){
 					listaCabestros.getSelectedValue().eliminarAnimal();
-					listaCabestros.setModel(GestorAnimales.getInstance().obtenerCabestros(1));
+					listaCabestros.setModel(GestorAnimales.getInstance().obtenerCabestros(idGanaderia));
 					
 				}else if (!listaToros.isSelectionEmpty() && listaCabestros.isSelectionEmpty()) 
 					listaToros.getSelectedValue().eliminarAnimal();
-					listaToros.setModel(GestorAnimales.getInstance().obtenerToros(1));
+					listaToros.setModel(GestorAnimales.getInstance().obtenerToros(idGanaderia));
 				}
 			
 		});
