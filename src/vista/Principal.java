@@ -18,8 +18,9 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Principal {
-
+public class Principal
+{
+	private int idGanaderia;
 	private JFrame frmPantallaPrincipal;
 
 	/**
