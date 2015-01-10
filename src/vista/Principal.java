@@ -22,7 +22,7 @@ public class Principal
 {
 	private int idGanaderia;
 	private JFrame frmPantallaPrincipal;
-
+	
 	/**
 	 * Launch the application.
 	 */
