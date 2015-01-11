@@ -1,11 +1,8 @@
 package vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
@@ -48,13 +45,14 @@ public class Principal
 	 */
 	public Principal(int pIdGanaderia, String pGanaderia)
 	{
-		initialize(pIdGanaderia, pGanaderia);
+		idGanaderia = pIdGanaderia;
+		initialize(pGanaderia);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(int pIdGanaderia, String pGanaderia)
+	private void initialize(String pGanaderia)
 	{
 		//FRAME
 		frmPantallaPrincipal = new JFrame();
@@ -78,6 +76,13 @@ public class Principal
 		
 		//Botón GESTIONAR ANIMALES
 		JButton btnGestAnim = new JButton("Gestionar Animales");
+
+		btnGestAnim.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent arg0) {
+				GestAnimal gA = new GestAnimal(idGanaderia);
+				gA.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_btnGestAnim = new GridBagConstraints();
 		gbc_btnGestAnim.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnGestAnim.insets = new Insets(0, 0, 5, 5);
