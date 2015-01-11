@@ -12,8 +12,19 @@ public abstract class Animal {
 		altura = pAltura;
 	}
 	
-	public abstract int modificarAnimal();
+	//public abstract int modificarAnimal();
 	public abstract void eliminarAnimal();
 	public abstract String toString();
 	
+	public String getNacimiento(){
+		return nacimiento;
+	}
+	
+	public float getPeso(){
+		return peso;
+	}
+	
+	public float getAltura(){
+		return altura;
+	}
 }

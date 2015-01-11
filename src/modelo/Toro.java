@@ -23,19 +23,13 @@ public class Toro extends Animal{
 	
 	/**
 	 * Modifica el toro en la base de datos
-	 * @param pIdToro
-	 * @param pNombre
-	 * @param pNacimiento
-	 * @param pPeso
-	 * @param pAltura
-	 * @param pLongitud
-	 * @return
+	 * @return rs
 	 */
-	public int modificarAnimal(){
+	public int modificarToro(String pNombre, String pNacimiento, float pPeso, float pAltura, float pLongCorn){
 			
-			String strSQL ="UPDATE Toro SET nombre = " + this.nombre + ", nacimiento = " + this.nacimiento + 
-					", peso = " + this.peso + ", altura = " + this.altura + ", longcorn = " + this.longcorn + " " +
-							"WHERE idToro = " + this.idToro;
+			String strSQL ="UPDATE Toro SET nombre = \"" + pNombre + "\", nacimiento = \"" + pNacimiento + 
+					"\", peso = " + pPeso + ", altura = " + pAltura + ", longcorn = " + pLongCorn + " " +
+							"WHERE idToro = " + this.idToro + ";";
 		
 			int rs = 0;
 			try{
@@ -49,7 +43,6 @@ public class Toro extends Animal{
 	
 	/**
 	 * Elimina el toro de la base de datos
-	 * @param pIdToro
 	 */
 	public void eliminarAnimal(){
 		
@@ -67,7 +60,15 @@ public class Toro extends Animal{
 	
 	@Override
 	public String toString(){
-		
 		return nombre;
 	}
+	
+	public String getNombre(){
+		return nombre;
+	}
+	
+	public float getLongCorn(){
+		return longcorn;
+	}
+
 }

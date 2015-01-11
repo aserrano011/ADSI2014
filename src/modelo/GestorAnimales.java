@@ -5,10 +5,13 @@ import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
 
+/**
+ * 
+ * @author Endika Serrano Lomas
+ * 
+ */
+
 public class GestorAnimales {
-	/**
-	 * @author Endika Serrano Lomas
-	 */
 	
 	private static GestorAnimales miGestorAnimales;
 	
@@ -26,7 +29,6 @@ public class GestorAnimales {
 	
 	/**
 	 * Añade el toro a la base de datos
-	 * @param pIdToro
 	 * @param pNombre
 	 * @param pNacimiento
 	 * @param pPeso
@@ -58,8 +60,6 @@ public class GestorAnimales {
 	
 	/**
 	 * Añade el cabestro a la base de datos
-	 * @param pIdCabestro
-	 * @param pNombre
 	 * @param pNacimiento
 	 * @param pPeso
 	 * @param pAltura
@@ -90,6 +90,7 @@ public class GestorAnimales {
 	
 	public DefaultListModel<Toro> obtenerToros(int pIdGanaderia){
 		
+		@SuppressWarnings("unused")
 		int cont = 0;
 
 		DefaultListModel<Toro> lista = new DefaultListModel<Toro>();
@@ -130,6 +131,7 @@ public class GestorAnimales {
 	
 	public DefaultListModel<Cabestro> obtenerCabestros(int pIdGanaderia){
 		
+		@SuppressWarnings("unused")
 		int cont = 0;
 
 		DefaultListModel<Cabestro> lista = new DefaultListModel<Cabestro>();

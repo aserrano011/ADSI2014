@@ -15,20 +15,19 @@ public class Cabestro extends Animal{
 	public Cabestro(int pIdCabestro, String pNacimiento, Float pPeso, Float pAltura, String pColor){
 		super(pNacimiento,pPeso,pAltura);
 		idCabestro = pIdCabestro;
-		
 		color = pColor;
 	}
 
 	
 	/**
 	 * Modifica el cabestro en la base de datos
-	 * @return
+	 * @return rs
 	 */
-	public int modificarAnimal(){
+	public int modificarCabestro(String pNacimiento, Float pPeso, Float pAltura, String pColor){
 		
-		String strSQL ="UPDATE Cabestro SET nacimiento = " + this.nacimiento + 
-				", peso = " + this.peso + ", altura = " + this.altura + ", color = " + this.color + " " +
-						"WHERE idCabestro = " + this.idCabestro;
+		String strSQL ="UPDATE Cabestro SET nacimiento = \"" + pNacimiento + 
+				"\", peso = " + pPeso + ", altura = " + pAltura + ", color = \"" + pColor + "\" " +
+						"WHERE idCabestro = " + this.idCabestro + ";";
 	
 		int rs = 0;
 		try{
@@ -64,5 +63,9 @@ public class Cabestro extends Animal{
 	public String toString(){
 		String nombre = "Cabestro " + idCabestro;
 		return nombre;
+	}
+	
+	public String getColor(){
+		return color;
 	}
 }

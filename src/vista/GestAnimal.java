@@ -1,6 +1,5 @@
 package vista;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -14,26 +13,27 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
+import modelo.Animal;
 import modelo.Cabestro;
 import modelo.GestorAnimales;
 import modelo.Toro;
 
-public class GestAnimal extends JFrame {
+/**
+ * 
+ * @author Endika Serrano Lomas
+ *
+ */
+public class GestAnimal extends JDialog {
 
-	/**
-	 * 
-	 *@author Endika Serrano Lomas
-	 *
-	 */
 	private static GestAnimal miGestAnimal;
 	private static final long serialVersionUID = 1L;
-	private int estado;
 	private static int idGanaderia;
 	private JPanel contentPane;
 	private JPanel panel = new JPanel();
@@ -45,8 +45,8 @@ public class GestAnimal extends JFrame {
 	private JButton btnModificar = new JButton("Modificar");
 	private JButton btnAtras = new JButton("Atr\u00E1s");
 
-	private JLabel lblToros = new JLabel("Toros");
-	private JLabel lblCabestros = new JLabel("Cabestros");
+	private JLabel lblToros = new JLabel("----------------Toros----------------");
+	private JLabel lblCabestros = new JLabel("----------------Cabestros----------------");
 	private JSplitPane splitPane = new JSplitPane();
 	private JScrollPane scrollPaneT = new JScrollPane();
 	private JScrollPane scrollPaneC = new JScrollPane();
@@ -69,7 +69,7 @@ public class GestAnimal extends JFrame {
 	}
 	
 	GestAnimal(int pIdGanaderia) {
-		//TODO
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		idGanaderia = pIdGanaderia;
 		inicializar();
 	}
@@ -84,10 +84,8 @@ public class GestAnimal extends JFrame {
 	
 	public void inicializar(){
 		
-	
-		
 		setTitle("Gestionar animales");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 386, 382);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,7 +93,6 @@ public class GestAnimal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		//BOTONES
-		
 		contentPane.add(panelBotones, BorderLayout.SOUTH);
 		
 		//AÑADIR
@@ -103,12 +100,10 @@ public class GestAnimal extends JFrame {
 		btnAnadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				estado = 0;
-				AltaAnimal aA = new AltaAnimal(idGanaderia,estado);
+				AltaAnimal aA = new AltaAnimal(idGanaderia,null);
 				aA.setVisible(true);
 				
 				if (!aA.isVisible()){
-					//TODO
 					listaCabestros.setModel(GestorAnimales.getInstance().obtenerCabestros(idGanaderia));
 					listaToros.setModel(GestorAnimales.getInstance().obtenerToros(idGanaderia));
 				}
@@ -120,6 +115,24 @@ public class GestAnimal extends JFrame {
 		btnModificar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
+				Animal animal;
+				if (listaToros.getSelectedValue() != null){
+					animal = listaToros.getSelectedValue();
+					AltaAnimal aA = new AltaAnimal(idGanaderia,animal);
+					aA.setVisible(true);
+					if (!aA.isVisible()){
+						listaToros.setModel(GestorAnimales.getInstance().obtenerToros(idGanaderia));
+					}
+				}else if (listaCabestros.getSelectedValue() != null){
+						animal = listaCabestros.getSelectedValue();
+						AltaAnimal aA = new AltaAnimal(idGanaderia,animal);
+						aA.setVisible(true);
+						if (!aA.isVisible()){
+							listaCabestros.setModel(GestorAnimales.getInstance().obtenerCabestros(idGanaderia));
+						}
+					}else {
+						JOptionPane.showMessageDialog(null,"Elige un animal a modificar");
+				}		
 			}
 		});
 		
@@ -128,7 +141,6 @@ public class GestAnimal extends JFrame {
 		btnEliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				//TODO
 				if (listaToros.isSelectionEmpty() && !listaCabestros.isSelectionEmpty()){
 					listaCabestros.getSelectedValue().eliminarAnimal();
 					listaCabestros.setModel(GestorAnimales.getInstance().obtenerCabestros(idGanaderia));
@@ -151,14 +163,12 @@ public class GestAnimal extends JFrame {
 		
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		//LABELS
-		
+		//LABELS	
 		lblToros.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(lblToros);
 		panel.add(lblCabestros);
 			
 		//LISTAS
-
 		contentPane.add(splitPane, BorderLayout.CENTER);
 		splitPane.setLeftComponent(scrollPaneT);
 		splitPane.setRightComponent(scrollPaneC);

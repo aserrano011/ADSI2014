@@ -11,25 +11,28 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-
 import javax.swing.JTabbedPane;
 
+import modelo.Animal;
 import modelo.GestorAnimales;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * 
+ * @author Endika Serrano Lomas
+ *
+ */
 public class AltaAnimal extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static int idGanaderia;
-	private static int estado;
+	private static Animal animal;
 	private JPanel pnlAnimales = new JPanel();
 	private JPanel Toro = new JPanel();
 	private JPanel Cabestro = new JPanel();
@@ -55,8 +58,6 @@ public class AltaAnimal extends JDialog {
 	private JPanel pnlBotones = new JPanel();
 	private JButton btnAceptar = new JButton("Aceptar");
 	private JButton btnCancelar = new JButton("Cancelar");
-	private JPanel pnlAlert = new JPanel();
-	private JLabel lblAlert = new JLabel("Rellena los campos que faltan");
 
 
 	/**
@@ -66,7 +67,7 @@ public class AltaAnimal extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AltaAnimal frame = new AltaAnimal(idGanaderia,estado);
+					AltaAnimal frame = new AltaAnimal(idGanaderia,animal);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -76,12 +77,12 @@ public class AltaAnimal extends JDialog {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the dialog.
 	 */
-	public AltaAnimal(int pIdGanaderia, int pEstado) {
+	public AltaAnimal(int pIdGanaderia, Animal pAnimal) {
 		setModalityType(ModalityType.APPLICATION_MODAL);
-		estado = pEstado;
 		idGanaderia = pIdGanaderia;
+		animal = pAnimal;
 		inicializar();
 	}
 	
@@ -93,31 +94,9 @@ public class AltaAnimal extends JDialog {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		getContentPane().add(pnlAnimales, BorderLayout.CENTER);
-		
-		getContentPane().add(pnlAlert, BorderLayout.NORTH);
-		
-		pnlAlert.add(lblAlert);
-		lblAlert.setVisible(false);
 		pnlAnimales.add(tabbedPane);
 		
-		//Control TEXTFIELDS
-		txtNombreT = new JTextField();
-		txtAnioT = new JTextField();
-		txtPesoT = new JTextField();
-		txtAlturaT = new JTextField();
-		txtLongT = new JTextField();
-		txtAnioC = new JTextField();
-		txtAlturaC = new JTextField();
-		txtColorC = new JTextField();
-		if (estado == 0){
-		
-		}else{
-			//txtNombreT.get
-		}
-		//TORO
-		
-		
-		
+		//PESTAÑAS DE TORO Y CABESTRO
 		tabbedPane.addTab("Toro", null, Toro, null);
 		GridBagLayout gbl_Toro = new GridBagLayout();
 		gbl_Toro.columnWidths = new int[]{132, 182, 0};
@@ -126,6 +105,42 @@ public class AltaAnimal extends JDialog {
 		gbl_Toro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		Toro.setLayout(gbl_Toro);
 		
+		tabbedPane.addTab("Cabestro", null, Cabestro, null);
+		GridBagLayout gbl_Cabestro = new GridBagLayout();
+		gbl_Cabestro.columnWidths = new int[]{132, 182, 0};
+		gbl_Cabestro.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_Cabestro.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_Cabestro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		Cabestro.setLayout(gbl_Cabestro);
+		
+		//Control TEXTFIELDS para MODIFICAR
+		txtNombreT = new JTextField();
+		txtAnioT = new JTextField();
+		txtPesoT = new JTextField();
+		txtLongT = new JTextField();
+		txtAnioC = new JTextField();
+		txtAlturaT = new JTextField();
+		txtAlturaC = new JTextField();
+		txtColorC = new JTextField();
+		txtPesoC = new JTextField();
+		
+		if (animal instanceof modelo.Toro){
+			tabbedPane.removeTabAt(1);
+			txtNombreT.setText(((modelo.Toro) animal).getNombre());
+			txtAnioT.setText(animal.getNacimiento());
+			txtPesoT.setText(String.valueOf(animal.getPeso()));
+			txtAlturaT.setText(String.valueOf(animal.getAltura()));
+			txtLongT.setText(String.valueOf(((modelo.Toro) animal).getLongCorn()));
+			
+		}else if (animal instanceof modelo.Cabestro){
+			tabbedPane.removeTabAt(0);
+			txtAnioC.setText(animal.getNacimiento());
+			txtPesoC.setText(String.valueOf(animal.getPeso()));
+			txtAlturaC.setText(String.valueOf(animal.getAltura()));
+			txtColorC.setText(((modelo.Cabestro) animal).getColor());
+		}
+		
+		//TORO
 		GridBagConstraints gbc_lblNombreT = new GridBagConstraints();
 		gbc_lblNombreT.anchor = GridBagConstraints.EAST;
 		gbc_lblNombreT.insets = new Insets(0, 0, 5, 5);
@@ -208,15 +223,6 @@ public class AltaAnimal extends JDialog {
 		txtLongT.setColumns(10);
 		
 		//CABESTRO
-		
-		tabbedPane.addTab("Cabestro", null, Cabestro, null);
-		GridBagLayout gbl_Cabestro = new GridBagLayout();
-		gbl_Cabestro.columnWidths = new int[]{132, 182, 0};
-		gbl_Cabestro.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_Cabestro.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_Cabestro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		Cabestro.setLayout(gbl_Cabestro);
-		
 		GridBagConstraints gbc_lblAnioC = new GridBagConstraints();
 		gbc_lblAnioC.anchor = GridBagConstraints.EAST;
 		gbc_lblAnioC.insets = new Insets(0, 0, 5, 5);
@@ -238,7 +244,6 @@ public class AltaAnimal extends JDialog {
 		gbc_lblPesoC.gridy = 2;
 		Cabestro.add(lblPesoC, gbc_lblPesoC);
 		
-		txtPesoC = new JTextField();
 		txtPesoC.setColumns(10);
 		GridBagConstraints gbc_txtPesoC = new GridBagConstraints();
 		gbc_txtPesoC.fill = GridBagConstraints.HORIZONTAL;
@@ -278,12 +283,15 @@ public class AltaAnimal extends JDialog {
 		gbc_txtColorC.gridy = 4;
 		Cabestro.add(txtColorC, gbc_txtColorC);
 		
+		//BOTONES
 		getContentPane().add(pnlBotones, BorderLayout.SOUTH);
 		pnlBotones.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		btnAceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				if (tabbedPane.getSelectedIndex() == 0){
+				
+				//AÑADIR TORO
+				if (tabbedPane.getSelectedIndex() == 0 && tabbedPane.getTabCount() == 2){
 					if (!txtNombreT.getText().equals("") && !txtAnioT.getText().equals("") && !txtPesoT.getText().equals("") && !txtAlturaT.getText().equals("") && !txtLongT.getText().equals("")){
 						
 						GestorAnimales.getInstance().anadirToro(txtNombreT.getText(), txtAnioT.getText(),
@@ -291,21 +299,43 @@ public class AltaAnimal extends JDialog {
 							Float.parseFloat(txtLongT.getText()), idGanaderia);
 						dispose();
 					}else{
-						lblAlert.setVisible(true);
+						JOptionPane.showMessageDialog(null,"Rellena todos los campos");
 					}
-
-				}else{
+				//AÑADIR CABESTRO
+				}else if (tabbedPane.getSelectedIndex() == 1 && tabbedPane.getTabCount() == 2){
 					if(!txtAnioC.getText().equals("") && !txtPesoC.getText().equals("") && !txtAlturaC.getText().equals("") && !txtColorC.getText().equals("")){
 						
 						GestorAnimales.getInstance().anadirCabestro(txtAnioC.getText(),	Float.parseFloat(txtPesoC.getText()), 
 							Float.parseFloat(txtAlturaC.getText()),txtColorC.getText(), idGanaderia);
 						dispose();
 					}else{
-						lblAlert.setVisible(true);
+					JOptionPane.showMessageDialog(null,"Rellena todos los campos");
 					}
+				//MODIFICAR TORO
+				}else if (tabbedPane.getTitleAt(0).equals("Toro") && tabbedPane.getTabCount() == 1){
+					if (!txtNombreT.getText().equals("") && !txtAnioT.getText().equals("") && !txtPesoT.getText().equals("") && !txtAlturaT.getText().equals("") && !txtLongT.getText().equals("")){
+							
+							((modelo.Toro) animal).modificarToro(txtNombreT.getText(), txtAnioT.getText(),
+								Float.parseFloat(txtPesoT.getText()), Float.parseFloat(txtAlturaT.getText()),
+								Float.parseFloat(txtLongT.getText()));
+							
+							dispose();
+						}else{
+							JOptionPane.showMessageDialog(null,"Rellena todos los campos");
+						}
+				//MODIFICAR CABESTRO
+				}else if (tabbedPane.getTitleAt(0).equals("Cabestro") && tabbedPane.getTabCount() == 1){	
+					if(!txtAnioC.getText().equals("") && !txtPesoC.getText().equals("") && !txtAlturaC.getText().equals("") && !txtColorC.getText().equals("")){
+								
+								((modelo.Cabestro) animal).modificarCabestro(txtAnioC.getText(), 
+									Float.parseFloat(txtPesoC.getText()), Float.parseFloat(txtAlturaC.getText()),txtColorC.getText());
+								
+								dispose();
+							}else{
+								JOptionPane.showMessageDialog(null,"Rellena todos los campos");
+							}
+						}
 				}
-				
-			}
 		});
 		
 		pnlBotones.add(btnAceptar);
