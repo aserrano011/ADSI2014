@@ -1,7 +1,5 @@
 package vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
@@ -63,7 +61,7 @@ public class AltaAnimal extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -74,7 +72,7 @@ public class AltaAnimal extends JDialog {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the dialog.

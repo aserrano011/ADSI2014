@@ -6,8 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JScrollPane;
 
 import java.awt.event.MouseAdapter;
@@ -38,8 +36,8 @@ public class GestAnimal extends JDialog {
 	private JPanel contentPane;
 	private JPanel panel = new JPanel();
 	private JPanel panelBotones = new JPanel();
-	private JList<Toro> listaToros = new JList<Toro>(GestorAnimales.getInstance().obtenerToros(1));
-	private JList<Cabestro> listaCabestros = new JList<Cabestro>(GestorAnimales.getInstance().obtenerCabestros(1));
+	private JList<Toro> listaToros = null;
+	private JList<Cabestro> listaCabestros = null;
 	private JButton btnAnadir = new JButton("A\u00F1adir");
 	private JButton btnEliminar = new JButton("Eliminar");
 	private JButton btnModificar = new JButton("Modificar");
@@ -55,7 +53,7 @@ public class GestAnimal extends JDialog {
 	 * Create the frame.
 	 */
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -66,11 +64,13 @@ public class GestAnimal extends JDialog {
 				}
 			}
 		});
-	}
+	}*/
 	
 	GestAnimal(int pIdGanaderia) {
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		idGanaderia = pIdGanaderia;
+		listaToros = new JList<Toro>(GestorAnimales.getInstance().obtenerToros(idGanaderia));
+		listaCabestros = new JList<Cabestro>(GestorAnimales.getInstance().obtenerCabestros(idGanaderia));
 		inicializar();
 	}
 	
