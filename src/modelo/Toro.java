@@ -2,6 +2,8 @@ package modelo;
 
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 /**
  * 
  * @author Endika Serrano Lomas
@@ -54,7 +56,7 @@ public class Toro extends Animal{
 			
 		}catch(SQLException e) {
 			System.out.println(strSQL);
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"Ese animal está inscrito en algún encierro, si desea eliminarlo antes debe retirarlo.");
 		}
 	}
 	
