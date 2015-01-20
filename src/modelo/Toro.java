@@ -38,7 +38,7 @@ public class Toro extends Animal{
 				rs = GestorBD.getInstance().actualizar(strSQL);
 			}catch(SQLException e) {
 				System.out.println(strSQL);
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null,"Alguno de los datos introducidos no es correcto, vuelva a intentarlo.");
 			}
 		return rs;
 	}

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -54,7 +55,7 @@ public class GestorAnimales {
 					
 				}
 				catch (SQLException e){
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Alguno de los datos introducidos no es correcto, vuelva a intentarlo.");
 				}
 	}
 	
@@ -83,7 +84,7 @@ public class GestorAnimales {
 					
 				}
 				catch (SQLException e){
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null,"Alguno de los datos introducidos no es correcto, vuelva a intentarlo.");
 				}	
 	}
 	
