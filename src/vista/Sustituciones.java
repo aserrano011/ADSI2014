@@ -6,146 +6,199 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JComboBox;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+
+import modelo.AlineacionCabestro;
+import modelo.AlineacionToro;
+import modelo.Encierro;
+import modelo.Ganaderia;
+import modelo.ListaGanaderias;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Sustituciones extends JFrame {
 
 	private JPanel contentPane;
-
+	private JLabel lblNewLabel;
+	private JLabel lblToroSustituto;
+	private JComboBox<Integer> cbToroTit;
+	private JComboBox<Integer> cbToroSus;
+	private JComboBox<Integer> cbCabTit;
+	private JComboBox<Integer> cbCabSus;
+	private DefaultComboBoxModel<Integer> modeloToroTit;
+	private DefaultComboBoxModel<Integer> modeloToroSus;
+	private DefaultComboBoxModel<Integer> modeloCabTit;
+	private DefaultComboBoxModel<Integer> modeloCabSus;
+	private Encierro enci;
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+		//EventQueue.invokeLater(new Runnable() {
+			//public void run() {
+				//try {
 					Sustituciones frame = new Sustituciones();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+					
+				/*} catch (Exception e) {
+					e.printStackTrace();}
+				
 			}
-		});
+		});*/
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Sustituciones() {
+		enci = new Encierro(null, 1, 20, 1);
+		int encierro = enci.ObtenerEncierroUnico(Principal.getIdGanaderia());
+		
+		enci.setIdEncierro(1);
+		modeloToroTit = new DefaultComboBoxModel<Integer>();
+		enci.obtenerTorosAlineacionSQL();
+		ArrayList<Integer> lista = enci.generarListaIDToro();
+		for(Integer i:lista){
+			modeloToroTit.addElement(i);
+		}
+		cbToroTit.setModel(modeloToroTit);
+		
+		modeloToroSus = new DefaultComboBoxModel<Integer>();
+		enci.obtenerCabestrosAlineacionSQL();
+		lista = enci.obtenerTorosSustitutos();
+		for(Integer i:lista){
+			modeloToroSus.addElement(i);
+		}
+		cbToroSus.setModel(modeloToroSus);
+		
+		modeloCabTit = new DefaultComboBoxModel<Integer>();
+	    lista = enci.generarListaIDCabestro();
+		for(Integer i:lista){
+			modeloCabTit.addElement(i);
+		}
+		cbCabTit.setModel(modeloCabTit);
+		
+		modeloCabSus = new DefaultComboBoxModel<Integer>();
+		lista = enci.obtenerCabestrosSustitutos();
+		for(Integer i:lista){
+			modeloCabSus.addElement(i);
+		}
+		cbCabSus.setModel(modeloCabSus);
+		
 		setTitle("Sustituciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Toro a sustituir");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		lblNewLabel = new JLabel("Toro a sustituir");
+		lblNewLabel.setBounds(51, 5, 72, 14);
+		contentPane.add(lblNewLabel);
 		
-		JLabel lblToroSustituto = new JLabel("Toro Sustituto");
-		GridBagConstraints gbc_lblToroSustituto = new GridBagConstraints();
-		gbc_lblToroSustituto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblToroSustituto.gridx = 1;
-		gbc_lblToroSustituto.gridy = 0;
-		contentPane.add(lblToroSustituto, gbc_lblToroSustituto);
+		lblToroSustituto = new JLabel("Toro Sustituto");
+		lblToroSustituto.setBounds(221, 5, 68, 14);
+		contentPane.add(lblToroSustituto);
 		
-		JComboBox comboBox = new JComboBox();
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.anchor = GridBagConstraints.NORTH;
-		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 0;
-		gbc_comboBox.gridy = 1;
-		contentPane.add(comboBox, gbc_comboBox);
+		cbToroTit = new JComboBox<Integer>();
+		cbToroTit.setBounds(5, 24, 165, 20);
+		contentPane.add(cbToroTit);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.anchor = GridBagConstraints.NORTH;
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 1;
-		gbc_comboBox_1.gridy = 1;
-		contentPane.add(comboBox_1, gbc_comboBox_1);
 		
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 1;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
+		
+		
+		
+		cbToroSus = new JComboBox<Integer>();
+		cbToroSus.setBounds(175, 24, 160, 20);
+		contentPane.add(cbToroSus);
+		
+		
+		
+		JButton sustituirToro = new JButton("Sustituir");
+		sustituirToro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int id1 = (int)cbToroTit.getSelectedItem();
+				int id2 = (int)cbToroSus.getSelectedItem();
+				enci.anadirSustitucionToroSQL(id1, id2);
+				JOptionPane.showMessageDialog(null, "Toro sustituido");
+				GestAlineacion ventana = new GestAlineacion();
+				ventana.setVisible(true);
+				
+			}
+		});
+		sustituirToro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		sustituirToro.setBounds(340, 24, 89, 23);
+		contentPane.add(sustituirToro);
 		
 		JList list = new JList();
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.gridwidth = 3;
-		gbc_list.insets = new Insets(0, 0, 5, 5);
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 0;
-		gbc_list.gridy = 2;
-		contentPane.add(list, gbc_list);
+		list.setBounds(5, 52, 419, 76);
+		contentPane.add(list);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Cabestro a Sustituir");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 3;
-		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		lblNewLabel_1.setBounds(40, 133, 95, 14);
+		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblCabestroSustituto = new JLabel("Cabestro Sustituto");
-		GridBagConstraints gbc_lblCabestroSustituto = new GridBagConstraints();
-		gbc_lblCabestroSustituto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCabestroSustituto.gridx = 1;
-		gbc_lblCabestroSustituto.gridy = 3;
-		contentPane.add(lblCabestroSustituto, gbc_lblCabestroSustituto);
+		lblCabestroSustituto.setBounds(210, 133, 90, 14);
+		contentPane.add(lblCabestroSustituto);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.anchor = GridBagConstraints.NORTH;
-		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_2.gridx = 0;
-		gbc_comboBox_2.gridy = 4;
-		contentPane.add(comboBox_2, gbc_comboBox_2);
+		cbCabTit = new JComboBox();
+		cbCabTit.setBounds(5, 152, 165, 20);
+		contentPane.add(cbCabTit);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
-		gbc_comboBox_3.anchor = GridBagConstraints.NORTH;
-		gbc_comboBox_3.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_3.gridx = 1;
-		gbc_comboBox_3.gridy = 4;
-		contentPane.add(comboBox_3, gbc_comboBox_3);
+		cbCabSus = new JComboBox<Integer>();
+		cbCabSus.setBounds(175, 152, 160, 20);
+		contentPane.add(cbCabSus);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_1.gridx = 2;
-		gbc_btnNewButton_1.gridy = 4;
-		contentPane.add(btnNewButton_1, gbc_btnNewButton_1);
+		
+		JButton sustituirCab = new JButton("Sustituir");
+		sustituirCab.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int id3 = (int)cbCabTit.getSelectedItem();
+				int id4 = (int)cbCabSus.getSelectedItem();
+				enci.anadirSustitucionCabestroSQL(id3, id4);
+				JOptionPane.showMessageDialog(null, "Cabestro sustituido");
+				GestAlineacion ventana = new GestAlineacion();
+				ventana.setVisible(true);
+				
+				
+			}
+		});
+		sustituirCab.setBounds(340, 152, 89, 23);
+		contentPane.add(sustituirCab);
 		
 		JList list_1 = new JList();
-		GridBagConstraints gbc_list_1 = new GridBagConstraints();
-		gbc_list_1.gridwidth = 3;
-		gbc_list_1.insets = new Insets(0, 0, 0, 5);
-		gbc_list_1.fill = GridBagConstraints.BOTH;
-		gbc_list_1.gridx = 0;
-		gbc_list_1.gridy = 5;
-		contentPane.add(list_1, gbc_list_1);
+		list_1.setBounds(5, 180, 419, 76);
+		contentPane.add(list_1);
 	}
 
 }

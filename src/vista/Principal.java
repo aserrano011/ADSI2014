@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
 
 public class Principal
 {
-	private int idGanaderia;
+	private static int idGanaderia;
 	private JFrame frmPantallaPrincipal;
 	
 	/**
@@ -161,4 +161,8 @@ public class Principal
 		frmPantallaPrincipal.setVisible(true);
 	}
 
+	public static int getIdGanaderia(){
+		return idGanaderia;
+	}
+	
 }

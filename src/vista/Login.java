@@ -36,6 +36,7 @@ public class Login extends JDialog
 	private JPanel buttonPane;
 	private JButton okButton;
 	private JButton cancelButton;
+	private JButton btnAsignarEncierros;
 
 	/**
 	 * Launch the application.
@@ -115,6 +116,10 @@ public class Login extends JDialog
 			{
 				//Botón OK
 				okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 				okButton.addMouseListener(new MouseAdapter()
 				{
 					public void mouseClicked(MouseEvent e)
@@ -132,6 +137,18 @@ public class Login extends JDialog
 						}
 					}
 				});
+				{
+					btnAsignarEncierros = new JButton("Asignar Encierros");
+					btnAsignarEncierros.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							if(arg0.getSource()==btnAsignarEncierros){
+								Encierros.main(null);
+								setVisible(false);
+							}
+						}
+					});
+					buttonPane.add(btnAsignarEncierros);
+				}
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

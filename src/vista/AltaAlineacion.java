@@ -1,21 +1,49 @@
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JButton;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JLabel;
+
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JList;
+
+import modelo.AlineacionCabestro;
+import modelo.AlineacionToro;
+import modelo.Animal;
+import modelo.Encierro;
+import modelo.Ganaderia;
+import modelo.ListaGanaderias;
 
 public class AltaAlineacion extends JFrame {
 
 	private JPanel contentPane;
+	private JList<Integer> listaCabestrosAlineados;
+	private JList<Integer> listaTorosAlineados;
+	private JList<Integer> listaTorosDisponibles;
+	private JList<Integer> listaCabestrosDisponibles;
+	private DefaultListModel<Integer> modeloCabestrosDisponibles;
+	private DefaultListModel<Integer> modeloCabestrosAlineados;
+	private DefaultListModel<Integer> modeloTorosDisponibles;
+	private DefaultListModel<Integer> modeloTorosAlineados;
+	private Encierro e;
+	
 
 	/**
 	 * Launch the application.
@@ -37,6 +65,10 @@ public class AltaAlineacion extends JFrame {
 	 * Create the frame.
 	 */
 	public AltaAlineacion() {
+		
+		e = new Encierro(null, 1, 20, 1);
+		
+		
 		setTitle("Insertar Alineaciones");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 429, 445);
@@ -65,13 +97,23 @@ public class AltaAlineacion extends JFrame {
 		gbc_lblTorosalineados.gridy = 0;
 		contentPane.add(lblTorosalineados, gbc_lblTorosalineados);
 		
-		JList list = new JList();
+		listaTorosDisponibles = new JList<Integer>();
+		listaTorosDisponibles.setVisibleRowCount( 8 );
+		add(new JScrollPane(listaTorosDisponibles));
 		GridBagConstraints gbc_list = new GridBagConstraints();
 		gbc_list.insets = new Insets(0, 0, 5, 5);
 		gbc_list.fill = GridBagConstraints.BOTH;
 		gbc_list.gridx = 1;
 		gbc_list.gridy = 1;
-		contentPane.add(list, gbc_list);
+		contentPane.add(listaTorosDisponibles, gbc_list);
+		
+		modeloTorosDisponibles = new DefaultListModel<Integer>();
+		ArrayList<Integer> lista = e.obtenerTorosInscripcion();
+		for(Integer i:lista){
+			modeloTorosDisponibles.addElement(i);
+		}
+		listaTorosDisponibles.setModel(modeloTorosDisponibles);
+		
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -100,13 +142,24 @@ public class AltaAlineacion extends JFrame {
 		gbc_btnEliminarToro.gridy = 1;
 		panel.add(btnEliminarToro, gbc_btnEliminarToro);
 		
-		JList list_2 = new JList();
+		listaTorosAlineados = new JList<Integer>();
+		listaTorosAlineados.setVisibleRowCount( 8 );
+		add(new JScrollPane(listaTorosAlineados));
 		GridBagConstraints gbc_list_2 = new GridBagConstraints();
 		gbc_list_2.insets = new Insets(0, 0, 5, 5);
 		gbc_list_2.fill = GridBagConstraints.BOTH;
 		gbc_list_2.gridx = 3;
 		gbc_list_2.gridy = 1;
-		contentPane.add(list_2, gbc_list_2);
+		contentPane.add(listaTorosAlineados, gbc_list_2);
+		
+		modeloTorosAlineados = new DefaultListModel<Integer>();
+		if(!e.getAlineacion().isEmpty()){
+			lista = e.generarListaIDToro();
+			for(Integer i:lista){
+				modeloCabestrosAlineados.addElement(i);
+			}
+			listaCabestrosAlineados.setModel(modeloCabestrosAlineados);
+		}
 		
 		JLabel lblNewLabel = new JLabel("Cabestros disponibles");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -123,13 +176,24 @@ public class AltaAlineacion extends JFrame {
 		gbc_lblNewLabel_1.gridy = 2;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		JList list_1 = new JList();
+		listaCabestrosDisponibles = new JList<Integer>();
+		listaCabestrosDisponibles.setVisibleRowCount( 8 );
+		add(new JScrollPane(listaCabestrosDisponibles));
 		GridBagConstraints gbc_list_1 = new GridBagConstraints();
 		gbc_list_1.insets = new Insets(0, 0, 5, 5);
 		gbc_list_1.fill = GridBagConstraints.BOTH;
 		gbc_list_1.gridx = 1;
 		gbc_list_1.gridy = 3;
-		contentPane.add(list_1, gbc_list_1);
+		contentPane.add(listaCabestrosDisponibles, gbc_list_1);
+		
+		modeloCabestrosDisponibles = new DefaultListModel<Integer>();
+		lista = e.obtenerCabestrosInscripcion();
+		for(Integer i:lista){
+			modeloCabestrosDisponibles.addElement(i);
+			
+		}
+		listaCabestrosDisponibles.setModel(modeloCabestrosDisponibles);
+		
 		
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -158,13 +222,26 @@ public class AltaAlineacion extends JFrame {
 		gbc_btnEliminarCabestro.gridy = 1;
 		panel_1.add(btnEliminarCabestro, gbc_btnEliminarCabestro);
 		
-		JList list_3 = new JList();
+		listaCabestrosAlineados = new JList<Integer>();
+		listaCabestrosAlineados.setVisibleRowCount( 8 );
+		add(new JScrollPane(listaCabestrosAlineados));
 		GridBagConstraints gbc_list_3 = new GridBagConstraints();
 		gbc_list_3.insets = new Insets(0, 0, 5, 5);
 		gbc_list_3.fill = GridBagConstraints.BOTH;
 		gbc_list_3.gridx = 3;
 		gbc_list_3.gridy = 3;
-		contentPane.add(list_3, gbc_list_3);
+		contentPane.add(listaCabestrosAlineados, gbc_list_3);
+		
+		modeloCabestrosAlineados = new DefaultListModel<Integer>();
+		if(!e.getAlineacion().isEmpty()){
+			lista = e.generarListaIDCabestro();
+			for(Integer i:lista){
+				modeloCabestrosAlineados.addElement(i);
+			}
+			listaCabestrosAlineados.setModel(modeloCabestrosAlineados);
+		}
+		
+		
 		
 		JPanel panel_2 = new JPanel();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
@@ -189,12 +266,107 @@ public class AltaAlineacion extends JFrame {
 		gbc_btnAceptar.gridy = 0;
 		panel_2.add(btnAceptar, gbc_btnAceptar);
 		
+		btnAceptar.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				ArrayList<AlineacionToro> alineacion = new ArrayList<AlineacionToro>();
+				Integer iaux;
+				AlineacionToro ataux;
+				for(int i=0; i<modeloTorosAlineados.getSize(); i++){
+					iaux=modeloTorosAlineados.elementAt(i);
+					ataux= new AlineacionToro(iaux, e.getIdEncierro());
+					alineacion.add(ataux);
+				}
+				e.setAlineacion(alineacion);
+				
+				ArrayList<AlineacionCabestro> alineacioncab = new ArrayList<AlineacionCabestro>();
+				AlineacionCabestro acaux;
+				for(int i=0; i<modeloCabestrosAlineados.getSize(); i++){
+					iaux=modeloCabestrosAlineados.elementAt(i);
+					acaux= new AlineacionCabestro(iaux, e.getIdEncierro());
+					alineacioncab.add(acaux);
+				}
+				e.setAlineacionCab(alineacioncab);
+				
+				e.registrarAlineacionesEnBase();
+			}			
+		});
+		
 		JButton btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.anchor = GridBagConstraints.WEST;
 		gbc_btnCancelar.gridx = 1;
 		gbc_btnCancelar.gridy = 0;
 		panel_2.add(btnCancelar, gbc_btnCancelar);
+		
+		
+		btnAnadirCabestro.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				Integer idsustituto;
+				idsustituto = listaCabestrosDisponibles.getSelectedValue();
+				if(idsustituto==null){
+					JOptionPane.showMessageDialog(null, "Se deben seleccionar dos cabestros");
+				}else{
+					modeloCabestrosDisponibles.removeElement(idsustituto);
+					listaCabestrosDisponibles.setModel(modeloCabestrosDisponibles);
+					modeloCabestrosAlineados.addElement(idsustituto);
+					listaCabestrosAlineados.setModel(modeloCabestrosAlineados);
+					
+				}
+			}
+		});
+		
+		btnEliminarCabestro.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				Integer idsustituido;
+				idsustituido = listaCabestrosAlineados.getSelectedValue();
+				if(idsustituido==null){
+					JOptionPane.showMessageDialog(null, "Se deben seleccionar dos cabestros");
+				}else{
+					modeloCabestrosDisponibles.addElement(idsustituido);
+					listaCabestrosDisponibles.setModel(modeloCabestrosDisponibles);
+					modeloCabestrosAlineados.removeElement(idsustituido);
+					listaCabestrosAlineados.setModel(modeloCabestrosAlineados);
+					
+				}
+			}
+		});
+		
+		btnAnadirToro.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				Integer idsustituto;
+				idsustituto = listaTorosDisponibles.getSelectedValue();
+				if(idsustituto==null){
+					JOptionPane.showMessageDialog(null, "Se deben seleccionar dos cabestros");
+				}else{
+					modeloTorosDisponibles.removeElement(idsustituto);
+					listaTorosDisponibles.setModel(modeloTorosDisponibles);
+					modeloTorosAlineados.addElement(idsustituto);
+					listaTorosAlineados.setModel(modeloTorosAlineados);
+					
+				}
+			}
+		});
+		
+		btnEliminarToro.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				Integer idsustituido;
+				idsustituido = listaTorosAlineados.getSelectedValue();
+				if(idsustituido==null){
+					JOptionPane.showMessageDialog(null, "Se deben seleccionar dos cabestros");
+				}else{
+					modeloTorosDisponibles.addElement(idsustituido);
+					listaTorosDisponibles.setModel(modeloTorosDisponibles);
+					modeloTorosAlineados.removeElement(idsustituido);
+					listaTorosAlineados.setModel(modeloTorosAlineados);
+					
+				}
+			}
+		});
 	}
 
 }
